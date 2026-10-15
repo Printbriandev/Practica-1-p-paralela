@@ -28,3 +28,22 @@ Desde la terminal:
 ```bash
 dotnet run --project HolaMundoMultihilo
 ```
+
+---
+
+# Práctica de Laboratorio 1: Ley de Amdahl y Análisis de Rendimiento Concurrente
+
+Carpeta: [`LeyAmdahlPedidos`](LeyAmdahlPedidos/ProcesamientoPedidos.cs)
+
+Procesamiento de 30,000 pedidos de comercio electrónico, cada uno con un cálculo matemático intensivo, comparando la versión secuencial con versiones paralelas:
+
+1. **Secuencial:** bucle `for` original.
+2. **`Parallel.For` sin `lock`:** incorrecta a propósito, para demostrar la condición de carrera sobre la variable compartida `total`.
+3. **`Parallel.For` con `lock` en cada pedido:** probada con `MaxDegreeOfParallelism` de 1, 2, 4, 8 y 16.
+4. **`Parallel.For` con acumuladores locales:** `localInit` / `localFinally`, con un solo `lock` por hilo.
+
+Para cada grado de paralelismo se calcula el Speedup `S = T_secuencial / T_paralelo` y la Eficiencia `E = S / p`. El análisis (Ley de Amdahl, Ley de Gustafson y la pregunta general) está al final del archivo, en el comentario `/* Mi análisis ... */`.
+
+```bash
+dotnet run -c Release --project LeyAmdahlPedidos
+```

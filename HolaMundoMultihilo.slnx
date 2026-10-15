@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="HolaMundoMultihilo/HolaMundoMultihilo.csproj" />
+  <Project Path="LeyAmdahlPedidos/LeyAmdahlPedidos.csproj" />
 </Solution>
