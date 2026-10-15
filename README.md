@@ -47,3 +47,21 @@ Para cada grado de paralelismo se calcula el Speedup `S = T_secuencial / T_paral
 ```bash
 dotnet run -c Release --project LeyAmdahlPedidos
 ```
+
+---
+
+# Práctica de Laboratorio 2: Ley de Gustafson y Análisis de Rendimiento Concurrente
+
+Carpeta: [`LeyGustafsonPedidos`](LeyGustafsonPedidos/LeyGustafsonPedidos.cs)
+
+En lugar de terminar el mismo trabajo más rápido, se busca procesar más pedidos dentro de la misma ventana de tiempo:
+
+1. Se mide la referencia: 100,000 pedidos con grado de paralelismo 1.
+2. Para los grados 2, 4, 8 y 16 se prueba la hipótesis ideal (100,000 × p) y se ajusta la cantidad de pedidos hasta que el tiempo quede dentro de la referencia ±10 %.
+3. Se calcula el factor de capacidad `C = N_p / N_1`, el throughput (pedidos por segundo) y se compara con el modelo de Gustafson `S = p - f (p - 1)` con `f = 5 %`.
+
+El análisis está al final del archivo, en el comentario `/* Mi análisis ... */`.
+
+```bash
+dotnet run -c Release --project LeyGustafsonPedidos
+```
