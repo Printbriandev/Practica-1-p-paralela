@@ -10,6 +10,7 @@
  *   Matrícula  : 2024-1286
  *   Docente    : Erick Leonardo Perez Veloz
  *   Fecha      : 14 de octubre de 2026
+ *   Repositorio: https://github.com/Printbriandev/Practica-1-p-paralela
  *
  *   Equipo de pruebas:
  *     CPU   : AMD Ryzen 5 7535HS (6 núcleos físicos, 12 lógicos)
