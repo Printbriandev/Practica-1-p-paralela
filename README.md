@@ -65,3 +65,39 @@ El análisis está al final del archivo, en el comentario `/* Mi análisis ... *
 ```bash
 dotnet run -c Release --project LeyGustafsonPedidos
 ```
+
+---
+
+# Práctica de Laboratorio 3: Descomposición de Tareas, Grafos de Dependencia y Mapeo
+
+Carpeta: [`DescomposicionMinimo`](DescomposicionMinimo/DescomposicionMinimo.cs)
+
+Búsqueda concurrente del valor mínimo en un arreglo de 50,000,000 de enteros aleatorios (semilla fija):
+
+1. **Secuencial:** recorrido de referencia.
+2. **Enfoque A (descomposición de datos):** `Environment.ProcessorCount` particiones estáticas, una `Task` por partición y reducción secuencial de los mínimos locales.
+3. **Enfoque B (descomposición recursiva):** divide y vencerás con `Task.Run` y un umbral de granularidad; se prueba con 1,000, 10,000, 1,000,000 y 10,000,000 elementos y se cuenta cuántas tareas se crean.
+
+Cada versión se mide con `Stopwatch` (calentamiento + mediana de 7 ejecuciones) y se valida contra el mínimo secuencial. El grafo de dependencias de Quicksort y el análisis de la sobre-descomposición y del ThreadPool están en el reporte PDF de la práctica.
+
+```bash
+dotnet run -c Release --project DescomposicionMinimo
+```
+
+---
+
+# Práctica de Laboratorio 4: Transposición de Matrices Paralela y Localidad de Caché
+
+Carpeta: [`TransposicionMatrices`](TransposicionMatrices/TransposicionMatrices.cs)
+
+Transposición de matrices `double` aleatorias de 1024 × 1024, 2000 × 2000 y 2048 × 2048:
+
+1. **Secuencial ingenua** (i-j).
+2. **Reordenamiento de bucles:** 2a. bucles intercambiados (j-i) y 2b. recorrido por bloques de 32 × 32 (loop tiling).
+3. **Paralela con `Parallel.For`:** 3a. por filas y 3b. por franjas de bloques.
+
+Se reporta el tiempo (mediana de 11 ejecuciones), el speedup frente a la versión ingenua y frente a la mejor secuencial, y se valida cada versión con `|resultado[i,j] - referencia[i,j]| < 1e-7`.
+
+```bash
+dotnet run -c Release --project TransposicionMatrices
+```
