@@ -101,3 +101,34 @@ Se reporta el tiempo (mediana de 11 ejecuciones), el speedup frente a la versió
 ```bash
 dotnet run -c Release --project TransposicionMatrices
 ```
+
+---
+
+# Práctica de Laboratorio 5: Reducción Paralela, Contención de Hilos y Estado Local
+
+Carpeta: [`ReduccionParalela`](ReduccionParalela/ReduccionParalela.cs)
+
+Suma de arreglos de 1,000,000, 5,000,000 y 10,000,000 de valores `double` uniformes en [-1, 1):
+
+1. **Secuencial simple.**
+2. **`Parallel.For` con `lock` masivo:** cada iteración toma el candado para sumar en la variable compartida.
+3. **`Parallel.For` con estado local:** `localInit` / `body` / `localFinally`; el `lock` solo se toma una vez por tarea.
+4. **3b. Estado local por bloques:** la misma estructura, con un `for` interno por bloque para reducir el costo de invocar el delegado.
+
+Se mide el tiempo (mediana), la cantidad de locks y `Monitor.LockContentionCount`, y se valida `|suma_paralela - suma_secuencial| < 1e-8`. Un experimento extra con valores en [0, 1000) compara la tolerancia absoluta con la relativa y con la suma compensada de Neumaier.
+
+```bash
+dotnet run -c Release --project ReduccionParalela
+```
+
+---
+
+# Asignación Teórica 6 (experimento): Algoritmos de Prefijo (Scan)
+
+Carpeta: [`ScanParalelo`](ScanParalelo/ScanParalelo.cs)
+
+Scan inclusivo de 2^20 y 2^24 enteros `long` con cuatro algoritmos: secuencial, Hillis-Steele, Blelloch (up-sweep / down-sweep) y por bloques en tres fases con 1, 2, 4, 6, 8 y 12 hilos. Cada resultado se compara con el secuencial y se reporta el trabajo (número de sumas) y las fases sincronizadas de cada algoritmo.
+
+```bash
+dotnet run -c Release --project ScanParalelo
+```

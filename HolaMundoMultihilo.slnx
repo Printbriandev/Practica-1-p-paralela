@@ -4,4 +4,6 @@
   <Project Path="LeyGustafsonPedidos/LeyGustafsonPedidos.csproj" />
   <Project Path="DescomposicionMinimo/DescomposicionMinimo.csproj" />
   <Project Path="TransposicionMatrices/TransposicionMatrices.csproj" />
+  <Project Path="ReduccionParalela/ReduccionParalela.csproj" />
+  <Project Path="ScanParalelo/ScanParalelo.csproj" />
 </Solution>
